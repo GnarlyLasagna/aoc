@@ -45,12 +45,15 @@ function readScratchCardTwo(input){
   const cards = input.split('\n');
   let instances = Array.from({ length: cards.length }, () => 1);
   cards.forEach((card) => {
+    //  console.log("instances ",instances)
     const [tag, sides] = card.split(/[:][ ]+/);
+      console.log("tag/sides ",tag," ",sides)
     const cardNumber = parseInt(tag.split(/[ ]+/)[1]);
     const [leftList, rightList] = sides.split(/[ ]+[|][ ]+/);
     const leftArray = leftList.split(/[ ]+/);
     const rightArray = rightList.split(/[ ]+/);
     const winningNumbers = leftArray.filter((number) => rightArray.includes(number)).length;
+      console.log("winningNumbers ",winningNumbers)
     for (let i = 0; i < winningNumbers; i++) {
       if(cardNumber + i < instances.length) {
         instances[cardNumber + i] = instances[cardNumber + i] + instances[cardNumber - 1];
