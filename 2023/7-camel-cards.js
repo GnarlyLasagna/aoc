@@ -1099,6 +1099,7 @@ KJKKK 720
 K55K6 42
 Q44Q4 22`
 
+// 244848487
 
 function sortCardsTwo(input){
 input = input.split("\n")
@@ -1112,7 +1113,7 @@ console.log(pairs)
 
 const cards = "AKQT98765432J"
 
-function getHandStrength(hand, bid) {
+function getHandStrength(hand ) {
 
   const sortedHand = hand.split("").sort().join("")
 
@@ -1262,11 +1263,10 @@ function comparePair(pair1, pair2) {
   return 0
 }
 
-
 //sort the pairs
 pairs.sort(comparePair)
 
-console.log(pairs)
+console.log("pairs ",pairs)
 console.log(pairs.map(x => getHandStrength(x[0], x[1])))
 
 let sum = 0;
