@@ -16,69 +16,67 @@ function numberFinder(input){ // version 1
     let ans = 0
     let nums = []
     let arr = input.split('\n')
-        for(i=0;i<arr.length; i++){
-
+    for(i=0;i<arr.length; i++){
         for(j=0;j<arr[i].length; j++){
             if (!isNaN(arr[i][j])){
-            nums.push(arr[i][j])
+                nums.push(arr[i][j])
             }
         }
     ans = Number(ans) + Number(`${nums[0]}${nums[nums.length-1]}`)
-     nums = []       
+    nums = []       
     }
-    return ans
+return ans
 }
 
 function secondNumberFinder(input){ //version 2
-let arr = input.split("\n")
-let firsts = ["o","t","f","s","e","n"]
-let ans = 0
-let nums = []
+    let arr = input.split("\n")
+    let firsts = ["o","t","f","s","e","n"]
+    let ans = 0
+    let nums = []
 
-        for(i=0;i<arr.length; i++){
-
+    for(i=0;i<arr.length; i++){
         for(j=0;j<arr[i].length; j++){
             let notNumber = isNaN(arr[i][j])
             if (!notNumber){
-            nums.push(arr[i][j])
+                nums.push(arr[i][j])
             }
             if(notNumber && firsts.includes(arr[i][j])){
-            console.log(arr[i][j])
+                console.log(arr[i][j])
 
-            if (arr[i][j] == "o"){
-            let mayb = arr[i].slice(j,j+3)
-                mayb === "one" ? nums.push(1) : 0
-           }
+                if (arr[i][j] == "o"){
+                    let mayb = arr[i].slice(j,j+3)
+                    mayb === "one" ? nums.push(1) : 0
+                }
  
-            if (arr[i][j] == "t"){
-            let mayb = arr[i].slice(j,j+3)
-            let secondMayb = arr[i].slice(j,j+5)
-                mayb === "two" ? nums.push(2) : 0
-                secondMayb === "three" ? nums.push(3) : 0
-           }
+                if (arr[i][j] == "t"){
+                    let mayb = arr[i].slice(j,j+3)
+                    let secondMayb = arr[i].slice(j,j+5)
+                    mayb === "two" ? nums.push(2) : 0
+                    secondMayb === "three" ? nums.push(3) : 0
+                }
 
-            if (arr[i][j] == "f"){
-            let mayb = arr[i].slice(j,j+4)
-                mayb === "four" ? nums.push(4) : 0
-                mayb === "five" ? nums.push(5) : 0
-           }
+                if (arr[i][j] == "f"){
+                    let mayb = arr[i].slice(j,j+4)
+                    mayb === "four" ? nums.push(4) : 0
+                    mayb === "five" ? nums.push(5) : 0
+                }
 
-            if (arr[i][j] == "s"){
-            let mayb = arr[i].slice(j,j+3)
-            let secondMayb = arr[i].slice(j,j+5)
-                mayb === "six" ? nums.push(6) : 0
-                secondMayb === "seven" ? nums.push(7) : 0
-            }
+                if (arr[i][j] == "s"){
+                    let mayb = arr[i].slice(j,j+3)
+                    let secondMayb = arr[i].slice(j,j+5)
+                    mayb === "six" ? nums.push(6) : 0
+                    secondMayb === "seven" ? nums.push(7) : 0
+                }
 
-            if (arr[i][j] == "e"){
-            let mayb = arr[i].slice(j,j+5)
-                mayb === "eight" ? nums.push(8) : 0
-            }
+                if (arr[i][j] == "e"){
+                let mayb = arr[i].slice(j,j+5)
+                    mayb === "eight" ? nums.push(8) : 0
+                }
 
-            if (arr[i][j] == "n"){
-            let mayb = arr[i].slice(j,j+4)
-                mayb === "nine" ? nums.push(9) : 0
-            }
+                if (arr[i][j] == "n"){
+                    let mayb = arr[i].slice(j,j+4)
+                    mayb === "nine" ? nums.push(9) : 0
+                }
             }
         }
             console.log("nums",nums)

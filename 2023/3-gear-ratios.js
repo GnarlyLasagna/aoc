@@ -19,93 +19,91 @@ const testInput = `467..114..
 // bottom right [i+1][j+1]
 
 function findPartNumbers(input){
-const arr = input.split('\n')
-let ans = 0
+    const arr = input.split('\n')
+    let ans = 0
     for(i=0;i<arr.length;i++){
-    console.log(arr[i])
+        console.log(arr[i])
         for(j=0;j<arr[i].length;j++){
-        let numStr = ""
-        let indexes = []
+            let numStr = ""
+            let indexes = []
         
-        if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1]) && !isNaN(arr[i][j+2])){
-        numStr = arr[i][j] + arr[i][j+1] + arr[i][j+2]
-        indexes = [j,j+1,j+2]
-        j++
-        j++
-        }
+            if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1]) && !isNaN(arr[i][j+2])){
+                numStr = arr[i][j] + arr[i][j+1] + arr[i][j+2]
+                indexes = [j,j+1,j+2]
+                j++
+                j++
+            }
 
-        else if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1])){
-        numStr = arr[i][j] + arr[i][j+1]
-        indexes = [j,j+1]
-        j++
-        }         
+            else if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1])){
+                numStr = arr[i][j] + arr[i][j+1]
+                indexes = [j,j+1]
+                j++
+            }         
 
-        else if(!isNaN(arr[i][j])){
-        numStr = arr[i][j]
-        indexes = [j]
+            else if(!isNaN(arr[i][j])){
+                numStr = arr[i][j]
+                indexes = [j]
+                }
+            for(k=0;k<indexes.length;k++){
+                if(i > 1 && isNaN(arr[i-1][indexes[k]] ) && arr[i-1][indexes[k]]  !== "."){
+                    console.log("num string that matches! ",numStr)
+                    ans+=Number(numStr)
+                    indexes = []
+                    break
+            }
+            if(i !== arr.length-1 && isNaN(arr[i+1][indexes[k]]) && arr[i+1][indexes[k]] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
+            if(indexes[k] > 1 && isNaN(arr[i][indexes[k]-1]) && arr[i][indexes[k]-1] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }   
+            if(indexes[k] !== arr[i].length-1 && isNaN(arr[i][indexes[k]+1]) && arr[i][indexes[k]+1] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
+            if(indexes[k] > 1 && i > 1 && isNaN(arr[i-1][indexes[k]-1]) && arr[i-1][indexes[k]-1] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
+            if(indexes[k] !== arr[i].length-1 && i > 1 && isNaN(arr[i-1][indexes[k]+1]) && arr[i-1][indexes[k]+1] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
+            if(indexes[k] > 1 && i !== arr.length-1 && isNaN(arr[i+1][indexes[k]-1]) && arr[i+1][indexes[k]-1] !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
+            if(indexes[k] !== arr[i].length-1 && i !== arr.length-1 && isNaN(arr[i+1][indexes[k]+1] ) && arr[i+1][indexes[k]+1]  !== "."){
+                console.log("num string that matches! ",numStr)
+                ans+=Number(numStr)
+                indexes = []
+                numStr = ""
+                break
+            }
         }
-        for(k=0;k<indexes.length;k++){
-
-
-        if(i > 1 && isNaN(arr[i-1][indexes[k]] ) && arr[i-1][indexes[k]]  !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        break
-        }
-        if(i !== arr.length-1 && isNaN(arr[i+1][indexes[k]]) && arr[i+1][indexes[k]] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && isNaN(arr[i][indexes[k]-1]) && arr[i][indexes[k]-1] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && isNaN(arr[i][indexes[k]+1]) && arr[i][indexes[k]+1] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && i > 1 && isNaN(arr[i-1][indexes[k]-1]) && arr[i-1][indexes[k]-1] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && i > 1 && isNaN(arr[i-1][indexes[k]+1]) && arr[i-1][indexes[k]+1] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && i !== arr.length-1 && isNaN(arr[i+1][indexes[k]-1]) && arr[i+1][indexes[k]-1] !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && i !== arr.length-1 && isNaN(arr[i+1][indexes[k]+1] ) && arr[i+1][indexes[k]+1]  !== "."){
-        console.log("num string that matches! ",numStr)
-        ans+=Number(numStr)
-        indexes = []
-        numStr = ""
-        break
-        }
-        }
-        }
-        indexes = []
-        numStr = ""
+    }
+    indexes = []
+    numStr = ""
     }
     console.log(ans)
 }
@@ -113,144 +111,144 @@ let ans = 0
 
 
 function findPartNumbersTwo(input){
-const arr = input.split('\n')
-let ans = 0
-let stars = {}
+    const arr = input.split('\n')
+    let ans = 0
+    let stars = {}
     for(i=0;i<arr.length;i++){
-    console.log(arr[i])
+        console.log(arr[i])
         for(j=0;j<arr[i].length;j++){
-        let numStr = ""
-        let indexes = []
+            let numStr = ""
+            let indexes = []
         
-        if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1]) && !isNaN(arr[i][j+2])){
-        numStr = arr[i][j] + arr[i][j+1] + arr[i][j+2]
-        indexes = [j,j+1,j+2]
-        j++
-        j++
-        }
+            if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1]) && !isNaN(arr[i][j+2])){
+                numStr = arr[i][j] + arr[i][j+1] + arr[i][j+2]
+                indexes = [j,j+1,j+2]
+                j++
+                j++
+            }
 
-        else if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1])){
-        numStr = arr[i][j] + arr[i][j+1]
-        indexes = [j,j+1]
-        j++
-        }         
+            else if(!isNaN(arr[i][j]) && !isNaN(arr[i][j+1])){
+                numStr = arr[i][j] + arr[i][j+1]
+                indexes = [j,j+1]
+                j++
+            }         
 
-        else if(!isNaN(arr[i][j])){
-        numStr = arr[i][j]
-        indexes = [j]
-        }
-        for(k=0;k<indexes.length;k++){
-        const star = "*"
+            else if(!isNaN(arr[i][j])){
+                numStr = arr[i][j]
+                indexes = [j]
+            }
+            for(k=0;k<indexes.length;k++){
+                const star = "*"
 
-        if(i > 1 && arr[i-1][indexes[k]] == star){
-        console.log("num string that matches! ",numStr)
+                if(i > 1 && arr[i-1][indexes[k]] == star){
+                    console.log("num string that matches! ",numStr)
 
-        if(stars[`${i-1}${indexes[k]}`]){
-        ans+=Number(numStr * stars[`${i-1}${indexes[k]}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i-1}${indexes[k]}`] = numStr
-        }
+                    if(stars[`${i-1}${indexes[k]}`]){
+                        ans+=Number(numStr * stars[`${i-1}${indexes[k]}`])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i-1}${indexes[k]}`] = numStr
+                }
 
-        indexes = []
-        break
-        }
-        if(i !== arr.length-1 && arr[i+1][indexes[k]] == star){
-        console.log("num string that matches! ",numStr)
+                indexes = []
+                break
+                }
+                if(i !== arr.length-1 && arr[i+1][indexes[k]] == star){
+                    console.log("num string that matches! ",numStr)
 
-        if(stars[`${i+1}${indexes[k]}`]){
-        ans+=Number(numStr * stars[`${i+1}${indexes[k]}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i+1}${indexes[k]}`] = numStr
+                    if(stars[`${i+1}${indexes[k]}`]){
+                        ans+=Number(numStr * stars[`${i+1}${indexes[k]}`])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i+1}${indexes[k]}`] = numStr
+                    }
+                    indexes = []
+                    numStr = ""
+                    break
+                }
+                if(indexes[k] > 1 && arr[i][indexes[k]-1] == star){
+                    console.log("num string that matches! ",numStr)
+
+                    if(stars[`${i}${indexes[k]-1}`]){
+                        ans+=Number(numStr * stars[`${i}${indexes[k]-1}`])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i}${indexes[k]-1}`] = numStr
+                }
+                indexes = []
+                numStr = ""
+                break
+                }
+                if(indexes[k] !== arr[i].length-1 && arr[i][indexes[k]+1]  == star){
+                    console.log("num string that matches! ",numStr)
+                    if(stars[`${i}${indexes[k]+1}`]){
+                        ans+=Number(numStr * stars[`${i}${indexes[k]+1}`])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i}${indexes[k]+1}`] = numStr
+                }
+
+                indexes = []
+                numStr = ""
+                break
+                }
+                if(indexes[k] > 1 && i > 1 && arr[i-1][indexes[k]-1] == star){
+                    console.log("num string that matches! ",numStr)
+                    if(stars[`${i-1}${indexes[k]-1}`]){
+                    ans+=Number(numStr * stars[`${i-1}${indexes[k]-1}`])
+                    console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i-1}${indexes[k]-1}`] = numStr
+                    }
+
+                indexes = []
+                numStr = ""
+                break
+                }
+                if(indexes[k] !== arr[i].length-1 && i > 1 && arr[i-1][indexes[k]+1] == star){
+                    console.log("num string that matches! ",numStr)
+                    if(stars[`${i-1}${indexes[k]+1}`]){
+                        ans+=Number(numStr * stars[`${i-1}${indexes[k]+1}`])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i-1}${indexes[k]+1}`] = numStr
+                    }
+
+                    indexes = []
+                    numStr = ""
+                    break
+                }
+                if(indexes[k] > 1 && i !== arr.length-1 && arr[i+1][indexes[k]-1] == star){
+                    console.log("num string that matches! ",numStr)
+                    if(stars[`${i+1}${indexes[k]-1}`]){
+                        ans+=Number(numStr * stars[`${i+1}${indexes[k]-1}`])
+                        console.log("theres an ajacent star!")
+                }else{ 
+                stars[`${i+1}${indexes[k]-1}`] = numStr
+                }
+                indexes = []
+                numStr = ""
+                break
+                }
+                if(indexes[k] !== arr[i].length-1 && i !== arr.length-1 && arr[i+1][indexes[k]+1] == star){
+                    console.log("num string that matches! ",numStr)
+                    if(stars[`${i+1}${indexes[k]+1}`]){
+                        ans+=Number(numStr * stars[i+1][indexes[k]+1])
+                        console.log("theres an ajacent star!")
+                    }else{ 
+                    stars[`${i+1}${indexes[k]+1}`] = numStr
+                    }
+                    indexes = []
+                    numStr = ""
+                    break
+                }
+            }
         }
         indexes = []
         numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && arr[i][indexes[k]-1] == star){
-        console.log("num string that matches! ",numStr)
-
-        if(stars[`${i}${indexes[k]-1}`]){
-        ans+=Number(numStr * stars[`${i}${indexes[k]-1}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i}${indexes[k]-1}`] = numStr
-        }
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && arr[i][indexes[k]+1]  == star){
-        console.log("num string that matches! ",numStr)
-        if(stars[`${i}${indexes[k]+1}`]){
-        ans+=Number(numStr * stars[`${i}${indexes[k]+1}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i}${indexes[k]+1}`] = numStr
-        }
-
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && i > 1 && arr[i-1][indexes[k]-1] == star){
-        console.log("num string that matches! ",numStr)
-        if(stars[`${i-1}${indexes[k]-1}`]){
-        ans+=Number(numStr * stars[`${i-1}${indexes[k]-1}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i-1}${indexes[k]-1}`] = numStr
-        }
-
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && i > 1 && arr[i-1][indexes[k]+1] == star){
-        console.log("num string that matches! ",numStr)
-        if(stars[`${i-1}${indexes[k]+1}`]){
-        ans+=Number(numStr * stars[`${i-1}${indexes[k]+1}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i-1}${indexes[k]+1}`] = numStr
-        }
-
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] > 1 && i !== arr.length-1 && arr[i+1][indexes[k]-1] == star){
-        console.log("num string that matches! ",numStr)
-        if(stars[`${i+1}${indexes[k]-1}`]){
-        ans+=Number(numStr * stars[`${i+1}${indexes[k]-1}`])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i+1}${indexes[k]-1}`] = numStr
-        }
-        indexes = []
-        numStr = ""
-        break
-        }
-        if(indexes[k] !== arr[i].length-1 && i !== arr.length-1 && arr[i+1][indexes[k]+1] == star){
-        console.log("num string that matches! ",numStr)
-        if(stars[`${i+1}${indexes[k]+1}`]){
-        ans+=Number(numStr * stars[i+1][indexes[k]+1])
-            console.log("theres an ajacent star!")
-        }else{ 
-        stars[`${i+1}${indexes[k]+1}`] = numStr
-        }
-        indexes = []
-        numStr = ""
-        break
-        }
-        }
-        }
-        indexes = []
-        numStr = ""
-        }
-    console.log(ans)
-        }
+    }
+console.log(ans)
+}
 
 
 
