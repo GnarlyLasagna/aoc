@@ -17,11 +17,94 @@ U 2 (#7a21e3)`
 function lavaductLagoon(input){
 input = input.split("\n")
 
+input = input.map(l => l.split(' ')).map(n => [n[0], +n[1], n[2]])
+
+const n = {
+  L: [-1, 0],
+  R: [1, 0],
+  U: [0, -1],
+  D: [0, 1],
 }
 
+const map = new Set()
+
+let current = [0,0]
+
+map.add(`${0}/${0}`)
+
+for (let [dir, steps] of input) {
+  const a = Array(steps).fill().map((_, i) => [n[dir][0] * (i+1)+current[0], n[dir][1] * (i+1)+current[1]])
+  a.forEach(p => map.add(`${p[0]}/${p[1]}`))
+  current = a.at(-1)
+}
+
+let minX = Infinity
+let maxX = -Infinity
+let minY = Infinity
+let maxY = -Infinity
+
+{[...map.values()].forEach(p => {
+  const [x,y] = p.split('/').map(n => +n)
+
+  minX = Math.min(minX, x)
+  maxX = Math.max(maxX, x)
+  minY = Math.min(minY, y)
+  maxY = Math.max(maxY, y)
+})}
+
+minX -= 1
+maxX += 1
+minY -= 1
+maxY += 1
+
+const outside = new Set()
+
+const toExplore = [[minX, minY]]
+
+while (toExplore.length > 0) {
+  const [x, y] = toExplore.pop()
+
+  const s = `${x}/${y}`
+
+  if (outside.has(s) || map.has(s) || x < minX || x > maxX || y < minY || y > maxY) continue
+
+  outside.add(s)
+
+  toExplore.push([x-1,y],[x+1,y],[x,y-1],[x,y+1])
+}
+
+console.log((maxX - minX + 1) * (maxY - minY + 1) - outside.size)
+}
 
 function lavaductLagoonTwo(input){
 input = input.split("\n")
+
+
+input = input.map(l => l.split(' ').slice(2)[0].slice(2, -1)).map(h => [parseInt(h.slice(0, -1), 16), +h.slice(-1)])
+
+const n = {
+  0: [1, 0],
+  1: [0, 1],
+  2: [-1, 0],
+  3: [0, -1],
+}
+
+const edges = [[0,0]]
+
+for (let [steps, dir] of input) {
+  const o = n[dir]
+  const current = edges.at(-1)
+  const next = [current[0] + steps * o[0], current[1] + steps * o[1]]
+  edges.push(next)
+}
+
+const areas = []
+
+for (let i = 0; i < edges.length -2; i++) {
+  areas.push(edges[i][0] * edges[i+1][1] - edges[i][1] * edges[i+1][0])
+}
+
+console.log((areas.reduce((s, a) => s+a, 0) + input.reduce((s, [d]) => s + d, 0))/2 + 1)
 
 }
 
@@ -814,3 +897,6 @@ L 12 (#77c592)
 U 4 (#17e4f3)
 L 4 (#02c002)
 U 4 (#157eb3)`
+
+lavaductLagoon(realInput)
+lavaductLagoonTwo(realInput)
